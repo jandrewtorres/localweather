@@ -7,7 +7,8 @@
   <title>Weather</title>
   <meta name="description" content="Weather">
   <meta name="author" content="John Torres">
-
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css?v=1.0">
 
   <!--[if lt IE 9]>
@@ -16,14 +17,28 @@
 </head>
 
 <body>
+
 	<div id="App">
-	<div id="container">
-		<h1>Weather</h1>
-		<h2 id="city">City</h2>
-		<h3 id="temp">Temp</h3>
+    <div id="topbox">
+      <div id="city" class="row"></div>
+    </div>
+    <div id="midbox">
+      <img id="icon"></img>
+      <div id="description" class="row"></div>
+      <div id="temp"></div>
+      <button id="FC">F / C</button>
+    </div>
+    <div id="botbox">
+      <div id="wind" class="row">
+        Wind:
+        <div id="windspeed"></div>
+        <div id="winddir"></div>
+      </div>
+    </div>
 	</div>
-	</div>
+
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?key=AIzaSyC4SOjqaH83zZTxYTT52dJjP_k7DHeUuIM"></script> 
   <script src="js/scripts.js"></script>
 </body>
 </html>
