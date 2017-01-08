@@ -1,5 +1,5 @@
 var metric = true;
-var url = '';
+var urls = '';
 var geocoder;
 var city = '';
 
@@ -51,8 +51,11 @@ function codeLatLng(lat, lng) {
 
 function updateLocation (city) {
   var metric_url = metric ? '&units=metric' : '&units=imperial';
-  url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + metric_url + '&APPID=c01b7699362cd3dbd9ecbada007111a1';
-  $.getJSON( url, function( data ) {
+  urls = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + metric_url + '&APPID=c01b7699362cd3dbd9ecbada007111a1';
+  $.ajax({
+    url: urls,
+    dataType: "jsonp"
+  }).done(function(data) {
     //put JSON data into items object
     var items = {};
     $.each( data, function( key, val ) {
