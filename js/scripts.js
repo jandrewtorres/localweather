@@ -51,7 +51,7 @@ function codeLatLng(lat, lng) {
 
 function updateLocation (city) {
   var metric_url = metric ? '&units=metric' : '&units=imperial';
-  urls = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + metric_url + '&APPID=c01b7699362cd3dbd9ecbada007111a1';
+  urls = 'https://api.openweathermap.org/data/2.5/weather?q=' + city + metric_url + '&APPID=c01b7699362cd3dbd9ecbada007111a1';
   $.ajax({
     url: urls,
     dataType: "jsonp"
@@ -65,7 +65,7 @@ function updateLocation (city) {
     $("#city").text(items.name);
     $("#temp").text(items.main.temp + (metric ? " °C" : " °F"));
     $("#description").text(items.weather[0].description);
-    $("#icon").attr("src", "http://openweathermap.org/img/w/" + items.weather[0].icon + ".png");
+    $("#icon").attr("src", "https://openweathermap.org/img/w/" + items.weather[0].icon + ".png");
     $("#windspeed").text("Speed: " +items.wind.speed +(metric ? " mps" : " mph"));
     $("#winddir").text("Direction: " + items.wind.deg + " °");
     $("#humidity").text(items.main.humidity + "%");
