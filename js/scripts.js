@@ -6,15 +6,24 @@ var items= {};
 function successFunction(position) {
   var lat = position.coords.latitude;
   var lng = position.coords.longitude;
-  updateLocation(lat, lng);
+  updateLocation(lat, lng, false);
 }
 
 function errorFunction(){
-  alert("Geocoder failed");
+  updateLocation(0, 0, true);
 }
 
-function updateLocation (lat, lng) {
-  urls = 'https://api.apixu.com/v1/current.json?key=1ad49f8106594b0688d03548170901&q=' + lat + ' ' + lng;
+function getURL(lat, lng, mobile) {
+  var key = '?key=1ad49f8106594b0688d03548170901';
+  var base = 'https://api.apixu.com/v1/current.json';
+  var loc = (mobile ? ('&q=auto:ip') : ('&q=' + lat + ' ' + lng));
+  var url = base + key + loc;
+  console.log(url);
+  return url;
+}
+
+function updateLocation (lat, lng, mobile) {
+  urls = getURL(lat, lng, mobile);
   $.ajax({
     url: urls,
     dataType: "json"
