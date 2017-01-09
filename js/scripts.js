@@ -2,9 +2,6 @@ var metric = true;
 var urls = '';
 var items= {};
 
-if (navigator.geolocation) {
-  navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
-} 
 //Get the latitude and the longitude;
 function successFunction(position) {
   var lat = position.coords.latitude;
@@ -63,6 +60,9 @@ function updateUI(items) {
 
 $( document ).ready(function() {
   $("body").hide();
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(successFunction, errorFunction);
+  } 
   $("button").on('click', function () {
     metric = !metric;
     updateUI(items);
