@@ -54,7 +54,7 @@ function updateUI(items) {
     $("#time").text(convertTimestamp(items.location.localtime_epoch));
     $("#temp").text(metric ? items.current.temp_c + " °C" : items.current.temp_f + " °F");
     $("#description").text(items.current.condition.text);
-    $("#icon").attr("src", 'http:' + items.current.condition.icon);
+    $("#icon").attr("src", 'https:' + items.current.condition.icon);
     $("#windspeed").text("Speed: " + (metric ? items.current.wind_kph + " kph" : items.current.wind_mph + " mph"));
     $("#winddir").text("Direction: " + items.current.wind_dir);
     $("#humidity").text(items.current.humidity + "%");
