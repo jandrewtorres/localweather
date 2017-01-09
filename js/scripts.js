@@ -1,7 +1,5 @@
 var metric = true;
 var urls = '';
-var geocoder;
-var city = '';
 var items= {};
 
 if (navigator.geolocation) {
@@ -19,7 +17,6 @@ function errorFunction(){
 }
 
 function updateLocation (lat, lng) {
-  var metric_url = metric ? '&units=metric' : '&units=imperial';
   urls = 'https://api.apixu.com/v1/current.json?key=1ad49f8106594b0688d03548170901&q=' + lat + ' ' + lng;
   $.ajax({
     url: urls,
@@ -39,9 +36,22 @@ function createItemsObject(data) {
   return items;
 }
 
+function convertTimestamp(unix_timestamp) {
+  var date = new Date(unix_timestamp*1000);
+  var hours = date.getHours() + 8;
+  var minutes = date.getMinutes();
+  var ampm = hours >= 12 ? 'pm' : 'am';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  minutes = minutes < 10 ? '0'+minutes : minutes;
+  var strTime = hours + ':' + minutes + ' ' + ampm;
+  return strTime;
+}
+
 function updateUI(items) {
     //insert Local Weather Data
     $("#city").text(items.location.name + ', ' + items.location.region);
+    $("#time").text(convertTimestamp(items.location.localtime_epoch));
     $("#temp").text(metric ? items.current.temp_c + " °C" : items.current.temp_f + " °F");
     $("#description").text(items.current.condition.text);
     $("#icon").attr("src", 'http:' + items.current.condition.icon);
